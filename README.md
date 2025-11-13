@@ -1,7 +1,7 @@
 📌 Dinner Planner – Domain Model & JPA Backend
 
 Dieses Repository enthält das JPA-basierte Domain-Model des DinnerPlanner-Projekts.
-Es stellt alle grundlegenden Entity-Klassen, Validierungen und Strukturen bereit, die für die Planung von Menüs benötigt werden — darunter Gänge, Kategorien, regionale Einordnung, Food-Restrictions und zentrale Angaben wie Personenanzahl oder Anlass. Damit bildet dieses Modul die Basis für die weiterführenden Systeme (KI-Generierung, externe APIs, automatische Vorschläge).
+Es stellt alle grundlegenden Entity-Klassen, Validierungen und Strukturen bereit, die für die Planung von Menüs benötigt werden — darunter Gänge, Kategorien, regionale Einordnung, Food-Restrictions und zentrale Angaben wie Personenanzahl oder Anlass. Damit bildet dieses Modul die fachliche Grundlage. Die weiterführenden Systeme (KI-Generierung, externe APIs, automatische Vorschläge) werden im REST-Server umgesetzt.
 
 Das Projekt entstand parallel zur Umschulung zum Fachinformatiker Anwendungsentwicklung und wurde auf eigene Initiative begonnen. 
 Es wird gemeinschaftlich im Team weitergeführt.
@@ -21,6 +21,8 @@ Der Fokus liegt auf teamorientierter Softwareentwicklung, sauberer Architektur u
 
 
 🛠️ Erweiterte Systeme & geplante Architektur
+
+*Die folgenden Erweiterungen sind Teil der Gesamtarchitektur des DinnerPlanner-Systems und werden im REST-Server implementiert. Das Domain-Modell dient dabei als fachliche Basis.*
 
 Das DinnerPlanner-Projekt entwickelt sich perspektivisch zu einem modularen Assistenzsystem, das interne Daten, KI-Modelle und externe APIs kombiniert.
 Die folgenden Komponenten gehören zum fest geplanten Funktionsumfang:
