@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+	version="3.0">
+
+	<persistence-unit name="local_database" transaction-type="RESOURCE_LOCAL">
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<!-- JDBC-Verbindung -->
+			<property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://127.0.0.1:3307/dinner_planner"/>
+			<property name="jakarta.persistence.jdbc.user" value="andreas" />
+			<property name="jakarta.persistence.jdbc.password" value="Ih23!k_iSDel" />
+			
+			<!-- Logging optional -->
+			<property name="eclipselink.logging.level.sql" value="FINE" />
+			<property name="eclipselink.logging.parameters" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>
