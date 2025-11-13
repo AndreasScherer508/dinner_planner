@@ -6,6 +6,7 @@ Es stellt alle grundlegenden Entity-Klassen, Validierungen und Strukturen bereit
 Das Projekt entstand parallel zur Umschulung zum Fachinformatiker Anwendungsentwicklung und wurde auf eigene Initiative begonnen. 
 Es wird gemeinschaftlich im Team weitergeführt.
 
+
 👥 Team & Zusammenarbeit
 
 Das Projekt entsteht gemeinsam mit:
@@ -17,6 +18,7 @@ Ali Abukel
 Andreas Scherer
 
 Der Fokus liegt auf teamorientierter Softwareentwicklung, sauberer Architektur und praxisnaher Anwendung moderner Java-Technologien.
+
 
 🛠️ Erweiterte Systeme & geplante Architektur
 
@@ -45,6 +47,7 @@ Alle eingehenden Daten (externe APIs, KI-Antworten, Nutzereingaben) werden serve
 Architektur, die es erlaubt, später weitere Komponenten anzuschließen:
 z. B. Kalender-Integration, Musiksteuerung, automatisierte Einkaufslisten, Eventautomatisierung, Getränke-Pairing u. a.
 
+
 🔧 Architektur
 
 Dieses Modul umfasst:
@@ -69,6 +72,7 @@ https://github.com/AndreasScherer508/dinner_planner_server
 
 Der Server nutzt dieses Model-Modul und stellt HTTP/JSON-Schnittstellen bereit.
 
+
 🧰 Technologien
 
 Java 17
@@ -78,6 +82,7 @@ Jakarta Persistence (JPA)
 Jakarta Validation
 
 Eclipse-basierte Projektstruktur
+
 
 🎯 Ziel & Kontext
 
@@ -92,6 +97,7 @@ Teamentwicklung und GitHub-basierter Zusammenarbeit
 Vorbereitung auf weiterführende Softwareentwicklungsprojekte
 
 Es wird privat und unabhängig vom Unterricht kontinuierlich weiterentwickelt.
+
 
 👤 Autor
 
