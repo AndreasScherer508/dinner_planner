@@ -30,24 +30,19 @@ Das DinnerPlanner-Projekt entwickelt sich perspektivisch zu einem modularen Assi
 Die folgenden Komponenten gehören zum fest geplanten Funktionsumfang:
 
 1. KI-basierte Rezepterstellung und -optimierung
-
 Rezepte werden mithilfe externer KI-Modelle (z. B. ChatGPT, Gemini) erstellt, überarbeitet oder ergänzt.
 Die generierten Inhalte werden anschließend standardisiert, intern verarbeitet und im System gespeichert.
 
 2. Integration externer APIs
-
 Einbindung von Diensten wie Spotify, Wetterdiensten oder weiteren Quellen, um Kontextinformationen (z. B. Stimmung, Wetterlage, Veranstaltungsart) in die Menü- und Eventplanung einzubeziehen.
 
 3. KI-gestützte Auswertung und Vorschläge
-
 Analyse der gespeicherten Daten — inklusive KI-Rezepte, Nutzerpräferenzen und externer Informationen — zur automatischen Generierung von Menüvorschlägen, Pairing-Empfehlungen und Ablaufplänen.
 
 4. Zentrale Datenspeicherung & interne Kommunikation
-
 Alle eingehenden Daten (externe APIs, KI-Antworten, Nutzereingaben) werden serverseitig vereinheitlicht, verarbeitet und persistent abgelegt.
 
 5. Erweiterbares Modul-System
-
 Architektur, die es erlaubt, später weitere Komponenten anzuschließen:
 z. B. Kalender-Integration, Musiksteuerung, automatisierte Einkaufslisten, Eventautomatisierung, Getränke-Pairing u. a.
 
