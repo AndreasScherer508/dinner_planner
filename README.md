@@ -13,9 +13,7 @@ Es wird gemeinschaftlich im Team weitergeführt.
 Das Projekt entsteht gemeinsam mit:
 
 - Angela Schlieben
-
 - Ali Abukel
-
 - Andreas Scherer
 
 Der Fokus liegt auf teamorientierter Softwareentwicklung, sauberer Architektur und praxisnaher Anwendung moderner Java-Technologien.
@@ -53,11 +51,8 @@ z. B. Kalender-Integration, Musiksteuerung, automatisierte Einkaufslisten, Event
 Dieses Modul umfasst:
 
 - JPA Entities
-
 - Validierungslogik (Jakarta Validation)
-
 - Hilfsklassen und Utility-Komponenten
-
 - vollständiges Datenmodell für die DinnerPlanner-Architektur
 
 Das Modul ist eigenständig, wird aber in der Praxis zusammen mit dem REST-Server betrieben.
@@ -79,11 +74,8 @@ Der Server nutzt dieses Model-Modul und stellt HTTP/JSON-Schnittstellen bereit.
 🧰 Technologien
 
 - Java 17
-
 - Jakarta Persistence (JPA)
-
 - Jakarta Validation
-
 - Eclipse-basierte Projektstruktur
 
 ***
@@ -93,11 +85,8 @@ Der Server nutzt dieses Model-Modul und stellt HTTP/JSON-Schnittstellen bereit.
 Das Projekt dient der:
 
 - Vertiefung objektorientierter Modellierung
-
 - Umsetzung professioneller Backend-Architektur
-
 - Teamentwicklung und GitHub-basierter Zusammenarbeit
-
 - Vorbereitung auf weiterführende Softwareentwicklungsprojekte
 
 Es wird privat und unabhängig vom Unterricht kontinuierlich weiterentwickelt.
