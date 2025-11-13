@@ -1,7 +1,7 @@
 📌 Dinner Planner – Domain Model & JPA Backend
 
 Dieses Repository enthält das JPA-basierte Domain-Model des DinnerPlanner-Projekts.
-Es stellt alle Entity-Klassen, Validierungen und Grundstrukturen bereit, die zur Verarbeitung von Rezepten, Zutaten, Personen und Menüfolgen benötigt werden.
+Es stellt alle grundlegenden Entity-Klassen, Validierungen und Strukturen bereit, die für die Planung von Menüs benötigt werden — darunter Gänge, Kategorien, regionale Einordnung, Food-Restrictions und zentrale Angaben wie Personenanzahl oder Anlass. Damit bildet dieses Modul die Basis für die weiterführenden Systeme (KI-Generierung, externe APIs, automatische Vorschläge).
 
 Das Projekt entstand parallel zur Umschulung zum Fachinformatiker Anwendungsentwicklung und wurde auf eigene Initiative begonnen. 
 Es wird gemeinschaftlich im Team weitergeführt.
@@ -17,6 +17,33 @@ Ali Abukel
 Andreas Scherer
 
 Der Fokus liegt auf teamorientierter Softwareentwicklung, sauberer Architektur und praxisnaher Anwendung moderner Java-Technologien.
+
+🛠️ Erweiterte Systeme & geplante Architektur
+
+Das DinnerPlanner-Projekt entwickelt sich perspektivisch zu einem modularen Assistenzsystem, das interne Daten, KI-Modelle und externe APIs kombiniert.
+Die folgenden Komponenten gehören zum fest geplanten Funktionsumfang:
+
+1. KI-basierte Rezepterstellung und -optimierung
+
+Rezepte werden mithilfe externer KI-Modelle (z. B. ChatGPT, Gemini) erstellt, überarbeitet oder ergänzt.
+Die generierten Inhalte werden anschließend standardisiert, intern verarbeitet und im System gespeichert.
+
+2. Integration externer APIs
+
+Einbindung von Diensten wie Spotify, Wetterdiensten oder weiteren Quellen, um Kontextinformationen (z. B. Stimmung, Wetterlage, Veranstaltungsart) in die Menü- und Eventplanung einzubeziehen.
+
+3. KI-gestützte Auswertung und Vorschläge
+
+Analyse der gespeicherten Daten — inklusive KI-Rezepte, Nutzerpräferenzen und externer Informationen — zur automatischen Generierung von Menüvorschlägen, Pairing-Empfehlungen und Ablaufplänen.
+
+4. Zentrale Datenspeicherung & interne Kommunikation
+
+Alle eingehenden Daten (externe APIs, KI-Antworten, Nutzereingaben) werden serverseitig vereinheitlicht, verarbeitet und persistent abgelegt.
+
+5. Erweiterbares Modul-System
+
+Architektur, die es erlaubt, später weitere Komponenten anzuschließen:
+z. B. Kalender-Integration, Musiksteuerung, automatisierte Einkaufslisten, Eventautomatisierung, Getränke-Pairing u. a.
 
 🔧 Architektur
 
