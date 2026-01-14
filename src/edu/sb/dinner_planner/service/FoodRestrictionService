@@ -1,0 +1,157 @@
+package edu.sb.dinner_planner.service;
+
+import java.util.Objects;
+import edu.sb.dinner_planner.persistence.FoodRestriction;
+import edu.sb.dinner_planner.persistence.Person;
+import jakarta.persistence.Cache;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.ws.rs.ClientErrorException;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response.Status;
+
+/**
+ * JAX-RS based service class for food restriction related services.
+ */
+@Path("restrictions")
+public class FoodRestrictionService {
+
+    static private final String HEADER_REQUESTER_IDENTITY = "X-Requester-Identity";
+
+    static private final String QUERY_RESTRICTIONS = """
+        select r.identity from FoodRestriction as r
+        where (:name is null or r.restrictionName like concat('%', :name, '%'))
+        order by r.restrictionName asc
+    """;
+
+    @PersistenceContext(unitName = "local_database")
+    private EntityManager entityManager;
+
+    /* ----------------------------- READ ----------------------------- */
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public FoodRestriction[] queryRestrictions(
+        @QueryParam("paging-offset") @PositiveOrZero final Integer pagingOffset,
+        @QueryParam("paging-limit")  @Positive final Integer pagingLimit,
+        @QueryParam("name")          final String name
+    ) {
+        final TypedQuery<Long> query = this.entityManager.createQuery(QUERY_RESTRICTIONS, Long.class);
+        if (pagingOffset != null) query.setFirstResult(pagingOffset);
+        if (pagingLimit  != null) query.setMaxResults(pagingLimit);
+
+        return query
+            .setParameter("name", name)
+            .getResultStream()
+            .map(id -> this.entityManager.find(FoodRestriction.class, id))
+            .filter(Objects::nonNull)
+            .toArray(FoodRestriction[]::new);
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public FoodRestriction findRestriction(@PathParam("id") @Positive final long restrictionIdentity) {
+        final FoodRestriction restriction = this.entityManager.find(FoodRestriction.class, restrictionIdentity);
+        if (restriction == null) throw new ClientErrorException(Status.NOT_FOUND);
+        return restriction;
+    }
+
+    /* ----------------------- CREATE / UPDATE ----------------------- */
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public long insertOrUpdateRestriction(
+        @HeaderParam(HEADER_REQUESTER_IDENTITY) @Positive final long requesterIdentity,
+        @NotNull @Valid final FoodRestriction template
+    ) {
+        this.entityManager.getTransaction().begin();
+        try {
+            // Berechtigungsprüfung (Optional, je nach Business-Logik)
+            final Person requester = this.entityManager.find(Person.class, requesterIdentity);
+            if (requester == null) throw new ClientErrorException(Status.FORBIDDEN);
+
+            final boolean insertMode = template.getIdentity() == 0L;
+            final FoodRestriction entity;
+
+            if (insertMode) {
+                // Hinweis: Hier müsste je nach Subtyp (Allergy/Diet) die korrekte Klasse instanziiert werden
+                // oder man nutzt polymorphes Marshaling via JSON.
+                entity = template; 
+            } else {
+                entity = this.entityManager.find(FoodRestriction.class, template.getIdentity());
+                if (entity == null) throw new ClientErrorException(Status.NOT_FOUND);
+                entity.setVersion(template.getVersion());
+            }
+
+            // Felder abgleichen
+            entity.setRestrictionName(template.getRestrictionName());
+            entity.setModified(System.currentTimeMillis());
+
+            if (insertMode) {
+                this.entityManager.persist(entity);
+            } else {
+                this.entityManager.merge(entity);
+            }
+
+            this.entityManager.getTransaction().commit();
+
+            final Cache cache = this.entityManager.getEntityManagerFactory().getCache();
+            cache.evict(FoodRestriction.class);
+
+            return entity.getIdentity();
+
+        } catch (RuntimeException e) {
+            if (this.entityManager.getTransaction().isActive())
+                this.entityManager.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    /* ----------------------------- DELETE ----------------------------- */
+
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public long deleteRestriction(
+        @HeaderParam(HEADER_REQUESTER_IDENTITY) @Positive final long requesterIdentity,
+        @PathParam("id") @Positive final long restrictionIdentity
+    ) {
+        this.entityManager.getTransaction().begin();
+        try {
+            final Person requester = this.entityManager.find(Person.class, requesterIdentity);
+            if (requester == null) throw new ClientErrorException(Status.FORBIDDEN);
+
+            final FoodRestriction entity = this.entityManager.find(FoodRestriction.class, restrictionIdentity);
+            if (entity == null) throw new ClientErrorException(Status.NOT_FOUND);
+
+            this.entityManager.remove(entity);
+            this.entityManager.getTransaction().commit();
+
+            final Cache cache = this.entityManager.getEntityManagerFactory().getCache();
+            cache.evict(FoodRestriction.class);
+
+            return restrictionIdentity;
+
+        } catch (RuntimeException e) {
+            if (this.entityManager.getTransaction().isActive())
+                this.entityManager.getTransaction().rollback();
+            throw e;
+        }
+    }
+}
